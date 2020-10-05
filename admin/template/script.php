@@ -31,7 +31,7 @@
 <script src="<?= base_url()?>/assets/js/counter/counter-custom.js"></script>
 
 <!--Customizer admin-->
-<script src="<?= base_url()?>/assets/js/admin-customizer.js"></script>
+<!-- <script src="<?= base_url()?>/assets/js/admin-customizer.js"></script> -->
 
 
 

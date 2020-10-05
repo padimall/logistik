@@ -1,4 +1,4 @@
 <?php 
-    header("Location: package");
+    header("Location: dashboard");
     die();
 ?>

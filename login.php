@@ -2,22 +2,60 @@
 include('function.php');
 include('curl.php');
 on_login();
-
+$message = '';
+$color = '#00baf2';
 if(isset($_POST['btn-login']))
 {
     $send = array(
         'email' => $_POST['login-email'],
         'password' => $_POST['login-password']
     );
-    $data = getData(api_url()."/api/v1/login",$send);
-    if(is_null($data)){
-        
+    $login = getData(api_url()."/api/v1/login",$send);
+    $login = json_decode($login,true);
+    if(empty($login['access_token'])){
+        $message = 'Email atau password salah!';
     }
     else {
-        $data = json_decode($data,true);
-        $_SESSION['access_token'] = $data['access_token'];
-        $_SESSION['expires_at'] = $data['expires_at'];
-        redirect(base_url().'/admin/paket');
+        
+        $_SESSION['access_token'] = $login['access_token'];
+        $_SESSION['expires_at'] = $login['expires_at'];
+        redirect(base_url().'/admin/dashboard');
+    }
+}
+
+if(isset($_POST['btn-register']))
+{
+    $send = array(
+        'name' => $_POST['register-name'],
+        'email' => $_POST['register-email'],
+        'phone' => $_POST['register-phone'],
+        'origin' => $_POST['register-origin'],
+        'destination' => $_POST['register-destination'],
+        'type' => $_POST['register-type'],
+        'password' => $_POST['register-password'],
+        'password_confirmation' => $_POST['register-re-password'],
+    );
+
+    $register = getData(api_url()."/api/v1/signup",$send);
+    $register = json_decode($register,true);
+
+    if(empty($register['status']))
+    {
+        if(isset($register['errors']['email'])){
+            $message = 'Email telah diambil.<br>';
+        }
+        if(isset($register['errors']['phone'])){
+            $message .= 'No Telp/Hp telah diambil.<br>';
+        }
+        if(isset($register['errors']['password'])){
+            $message .= 'Minimal password adalah 8 karakter atau kata sandi ulang tidak sama.';
+        }
+        $color = 'red';
+
+    }
+    else {
+        unset($_POST);
+        $message = 'Registrasi berhasil!';
     }
 }
 
@@ -202,7 +240,7 @@ if(isset($_POST['btn-login']))
                                             <input required="" name="login-email" type="email" class="form-control" placeholder="Email" id="exampleInputEmail1">
                                         </div>
                                         <div class="form-group">
-                                            <input required="" name="login-password" type="password" class="form-control" placeholder="Password">
+                                            <input required="" name="login-password" type="password" class="form-control" placeholder="Kata sandi">
                                         </div>
                                         <div class="form-terms">
                                             <div class="custom-control custom-checkbox mr-sm-2">
@@ -213,6 +251,7 @@ if(isset($_POST['btn-login']))
                                         </div>
                                         <div class="form-button">
                                             <button class="btn btn-primary" type="submit" name="btn-login">Login</button>
+                                            <p style="color : <?= $color?>"><?= $message?></p>
                                         </div>
                                         <div class="form-footer">
                                             
@@ -220,18 +259,33 @@ if(isset($_POST['btn-login']))
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
-                                    <form class="form-horizontal auth-form">
+                                    <form class="form-horizontal auth-form" method="POST">
                                         <div class="form-group">
-                                            <input required="" name="login[username]" type="email" class="form-control" placeholder="Username" id="exampleInputEmail12">
+                                            <input required="" name="register-name" value="<?= !empty($_POST['register-name']) ? htmlentities($_POST['register-name']) : '' ?>" type="text" class="form-control" placeholder="Nama" id="exampleInputEmail12">
                                         </div>
                                         <div class="form-group">
-                                            <input required="" name="login[password]" type="password" class="form-control" placeholder="Password">
+                                            <input required="" name="register-phone" value="<?= !empty($_POST['register-phone']) ? htmlentities($_POST['register-phone']) : '' ?>" type="text" class="form-control" placeholder="No Telp/Hp">
                                         </div>
                                         <div class="form-group">
-                                            <input required="" name="login[password]" type="password" class="form-control" placeholder="Confirm Password">
+                                            <input required="" name="register-origin" value="<?= !empty($_POST['register-origin']) ? htmlentities($_POST['register-origin']) : '' ?>" type="text" class="form-control" placeholder="Lokasi">
+                                        </div>
+                                        <div class="form-group">
+                                            <input required="" name="register-type" value="<?= !empty($_POST['register-type']) ? htmlentities($_POST['register-type']) : '' ?>" type="text" class="form-control" placeholder="Jenis">
+                                        </div>
+                                        <div class="form-group">
+                                            <input required="" name="register-destination" value="<?= !empty($_POST['register-destination']) ? htmlentities($_POST['register-destination']) : '' ?>" type="text" class="form-control" placeholder="Tujuan">
+                                        </div>
+                                        <div class="form-group">
+                                            <input required="" name="register-email" value="<?= !empty($_POST['register-email']) ? htmlentities($_POST['register-email']) : '' ?>" type="email" class="form-control" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <input required="" name="register-password" type="text" class="form-control" placeholder="Kata sandi">
+                                        </div>
+                                        <div class="form-group">
+                                            <input required="" name="register-re-password" type="text" class="form-control" placeholder="Ulang kata sandi">
                                         </div>
                                         <div class="form-button">
-                                            <button class="btn btn-primary" type="submit">Register</button>
+                                            <button class="btn btn-primary" type="submit" name="btn-register">Register</button>
                                         </div>
                                         <div class="form-footer">
                                             
@@ -244,7 +298,6 @@ if(isset($_POST['btn-login']))
                     </div>
                 </div>
             </div>
-            <a href="index.html" class="btn btn-primary back-btn"><i data-feather="arrow-left"></i>back</a>
         </div>
     </div>
 </div>

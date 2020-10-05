@@ -38,7 +38,7 @@ if(isset($_POST['btn-save-package']))
                         </div>
                         <div class="col-lg-6">
                             <ol class="breadcrumb pull-right">
-                                <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="<?= base_url().'/admin'?>"><i data-feather="home"></i></a></li>
                                 <li class="breadcrumb-item active">Paket</li>
                             </ol>
                         </div>
