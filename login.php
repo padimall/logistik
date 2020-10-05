@@ -279,10 +279,10 @@ if(isset($_POST['btn-register']))
                                             <input required="" name="register-email" value="<?= !empty($_POST['register-email']) ? htmlentities($_POST['register-email']) : '' ?>" type="email" class="form-control" placeholder="Email">
                                         </div>
                                         <div class="form-group">
-                                            <input required="" name="register-password" type="text" class="form-control" placeholder="Kata sandi">
+                                            <input required="" name="register-password" type="password" class="form-control" placeholder="Kata sandi">
                                         </div>
                                         <div class="form-group">
-                                            <input required="" name="register-re-password" type="text" class="form-control" placeholder="Ulang kata sandi">
+                                            <input required="" name="register-re-password" type="password" class="form-control" placeholder="Ulang kata sandi">
                                         </div>
                                         <div class="form-button">
                                             <button class="btn btn-primary" type="submit" name="btn-register">Register</button>
