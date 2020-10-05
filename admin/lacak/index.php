@@ -82,28 +82,30 @@ if(isset($_POST['btn-cari']))
                                     if(isset($_POST['btn-cari']) && !empty($tracking['data'])){ 
                                         $tracking = $tracking['data'];
                                         ?>   
-                                        <table id="example" class="display" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Lokasi</th>
-                                                    <th>Detail</th>
-                                                    <th>Waktu</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php 
-                                                    for($i=0; $i<sizeof($tracking); $i++)
-                                                    {
-                                                ?>
-                                            
-                                                <tr>
-                                                    <td><?= $tracking[$i]['location'] ?></td>
-                                                    <td><?= $tracking[$i]['detail'] ?></td>
-                                                    <td><?= $tracking[$i]['created_at'] ?></td>
-                                                </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
+                                        <div class="table-responsive">
+                                            <table id="example" class="display " style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Lokasi</th>
+                                                        <th>Detail</th>
+                                                        <th>Waktu</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php 
+                                                        for($i=0; $i<sizeof($tracking); $i++)
+                                                        {
+                                                    ?>
+                                                
+                                                    <tr>
+                                                        <td><?= $tracking[$i]['location'] ?></td>
+                                                        <td><?= $tracking[$i]['detail'] ?></td>
+                                                        <td><?= $tracking[$i]['created_at'] ?></td>
+                                                    </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     <?php } ?>
                                 </div>
                             </div>

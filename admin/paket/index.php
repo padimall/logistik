@@ -57,40 +57,42 @@ if(isset($_POST['btn-save-package']))
                             </div>
                             <div class="card-body">
                                 <div id="basicScenario" class="product-list">
-                                    <table id="example" class="display jsgrid-table" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th>No Resi</th>
-                                                <th>Layanan</th>
-                                                <th>Jenis </th>
-                                                <th>Asal</th>
-                                                <th>Tujuan</th>
-                                                <th>Penerima</th>
-                                                <th>Kontak Penerima</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php 
-                                                $data = getData(api_url()."/api/v1/package/all",$token,NULL);
-                                                $data = json_decode($data,true);
-                                                $data = $data['data'];
-                                                for($i=0; $i<sizeof($data); $i++)
-                                                {
+                                    <div class="table-responsive">
+                                        <table id="example" class="display jsgrid-table" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>No Resi</th>
+                                                    <th>Layanan</th>
+                                                    <th>Jenis </th>
+                                                    <th>Asal</th>
+                                                    <th>Tujuan</th>
+                                                    <th>Penerima</th>
+                                                    <th>Kontak Penerima</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php 
+                                                    $data = getData(api_url()."/api/v1/package/all",$token,NULL);
+                                                    $data = json_decode($data,true);
+                                                    $data = $data['data'];
+                                                    for($i=0; $i<sizeof($data); $i++)
+                                                    {
+                                                
+                                                ?>
                                             
-                                            ?>
-                                        
-                                            <tr>
-                                                <td><?= $data[$i]['id'] ?></td>
-                                                <td><?= $data[$i]['service_name'] ?></td>
-                                                <td><?= $data[$i]['type'] ?></td>
-                                                <td><?= $data[$i]['origin']; ?></td>
-                                                <td><?= $data[$i]['receiver_city']; ?></td>
-                                                <td><?= $data[$i]['receiver']; ?></td>
-                                                <td><?= $data[$i]['receiver_contact']; ?></td>
-                                            </tr>
-                                            <?php } ?>
-                                        </tbody>
-                                    </table>
+                                                <tr>
+                                                    <td><?= $data[$i]['id'] ?></td>
+                                                    <td><?= $data[$i]['service_name'] ?></td>
+                                                    <td><?= $data[$i]['type'] ?></td>
+                                                    <td><?= $data[$i]['origin']; ?></td>
+                                                    <td><?= $data[$i]['receiver_city']; ?></td>
+                                                    <td><?= $data[$i]['receiver']; ?></td>
+                                                    <td><?= $data[$i]['receiver_contact']; ?></td>
+                                                </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

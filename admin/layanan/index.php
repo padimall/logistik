@@ -57,32 +57,34 @@ if(isset($_POST['btn-save-service']))
                             </div>
                             <div class="card-body">
                                 <div id="basicScenario" class="product-list">
-                                    <table id="example" class="display jsgrid-table" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Nama Layanan</th>
-                                                <th>Detail </th>
-                                                <th>Harga</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php 
-                                                $data = getData(api_url()."/api/v1/service/all",$token,NULL);
-                                                $data = json_decode($data,true);
-                                                $data = $data['data'];
-                                                for($i=0; $i<sizeof($data); $i++)
-                                                {
+                                    <div class="table-responsive">
+                                        <table id="example" class="display jsgrid-table" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama Layanan</th>
+                                                    <th>Detail </th>
+                                                    <th>Harga</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php 
+                                                    $data = getData(api_url()."/api/v1/service/all",$token,NULL);
+                                                    $data = json_decode($data,true);
+                                                    $data = $data['data'];
+                                                    for($i=0; $i<sizeof($data); $i++)
+                                                    {
+                                                
+                                                ?>
                                             
-                                            ?>
-                                        
-                                            <tr>
-                                                <td><?= $data[$i]['name'] ?></td>
-                                                <td><?= $data[$i]['detail'] ?></td>
-                                                <td><?= $data[$i]['price']; ?></td>
-                                            </tr>
-                                            <?php } ?>
-                                        </tbody>
-                                    </table>
+                                                <tr>
+                                                    <td><?= $data[$i]['name'] ?></td>
+                                                    <td><?= $data[$i]['detail'] ?></td>
+                                                    <td><?= $data[$i]['price']; ?></td>
+                                                </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
