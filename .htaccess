@@ -1,0 +1,16 @@
+RewriteEngine on
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+# RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
+
+ErrorDocument 404 /404.html
+RewriteCond %{HTTP_HOST} ^logistic\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.mymillionfx\.com$
+RewriteRule ^/?$ "https\:\/\/millionfx\.co\.id\/" [R=302,L]
+
