@@ -32,13 +32,13 @@ if(isset($_POST['btn-save-service']))
                         <div class="col-lg-6">
                             <div class="page-header-left">
                                 <h3>Layanan <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-original-title="test" data-target="#addService">Tambah Layanan</button>
-                                    <small>Padistic Admin panel</small>
+                                    <small>Padistik Admin panel</small>
                                 </h3>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <ol class="breadcrumb pull-right">
-                                <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="<?= base_url().'/admin'?>"><i data-feather="home"></i></a></li>
                                 <li class="breadcrumb-item active">Layanan</li>
                             </ol>
                         </div>

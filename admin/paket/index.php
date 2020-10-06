@@ -32,7 +32,7 @@ if(isset($_POST['btn-save-package']))
                         <div class="col-lg-6">
                             <div class="page-header-left">
                                 <h3>Paket <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-original-title="test" data-target="#addPackage">Tambah Paket</button>
-                                    <small>Padistic Admin panel</small>
+                                    <small>Padistik Admin panel</small>
                                 </h3>
                             </div>
                         </div>

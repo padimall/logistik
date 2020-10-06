@@ -72,7 +72,7 @@ if(isset($_POST['btn-register']))
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="<?= base_url()?>/assets/images/favicon/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="<?= base_url()?>/assets/images/favicon/favicon.ico" type="image/x-icon">
-    <title>Bigdeal - Premium Admin Template</title>
+    <title>Padistik - Padimall Logistik</title>
 
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -203,20 +203,8 @@ if(isset($_POST['btn-register']))
                         <div class="single-item">
                             <div>
                                 <div>
-                                    <h3>Welcome to Bigdeal</h3>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <h3>Welcome to Bigdeal</h3>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <h3>Welcome to Bigdeal</h3>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
+                                    <h3>Selamat datang di Padistik</h3>
+                                    <p>Padistik merupakan logistik pengiriman barang untuk Padimall</p>
                                 </div>
                             </div>
                         </div>

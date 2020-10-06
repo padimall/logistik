@@ -9,7 +9,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="<?= base_url()?>/assets/images/favicon/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="<?= base_url()?>/assets/images/favicon/favicon.ico" type="image/x-icon">
-    <title>Bigdeal - Premium Admin Template</title>
+    <title>Padistik - Padimall Logistik</title>
 
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">

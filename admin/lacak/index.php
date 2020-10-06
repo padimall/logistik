@@ -33,13 +33,13 @@ if(isset($_POST['btn-cari']))
                         <div class="col-lg-6">
                             <div class="page-header-left">
                                 <h3>Lacak Paket
-                                    <small>Padistic Admin panel</small>
+                                    <small>Padistik Admin panel</small>
                                 </h3>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <ol class="breadcrumb pull-right">
-                                <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="<?= base_url().'/admin'?>"><i data-feather="home"></i></a></li>
                                 <li class="breadcrumb-item active">Lacak</li>
                             </ol>
                         </div>
