@@ -64,7 +64,7 @@ if(isset($_POST['btn-cari']))
                                                     <?php 
                                                         if(empty($tracking['data']) && isset($_POST['btn-cari'])){
                                                     ?>
-                                                        <p style="color: red;">Nomor resi tidak ditemukan!</p>
+                                                        <p class="badge badge-danger">Nomor resi tidak ditemukan!</p>
                                                     <?php } ?>
                                                 </div>
                                                 <div class="col-md-6">
@@ -100,7 +100,7 @@ if(isset($_POST['btn-cari']))
                                                     <tr>
                                                         <td><?= $tracking[$i]['location'] ?></td>
                                                         <td><?= $tracking[$i]['detail'] ?></td>
-                                                        <td><?= $tracking[$i]['created_at'] ?></td>
+                                                        <td><?= dateIndo($tracking[$i]['created_at']) ?></td>
                                                     </tr>
                                                     <?php } ?>
                                                 </tbody>

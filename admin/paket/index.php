@@ -7,7 +7,11 @@ $token = $_SESSION['access_token'];
 
 if(isset($_POST['btn-save-package']))
 {
-    $data = getData(api_url()."/api/v1/package/store",$token,$_POST);    
+    $_POST['weight'] = preg_replace('/\./','',$_POST['weight']);
+    $_POST['price'] = preg_replace('/\./','',$_POST['price']);
+
+    $savePackage = getData(api_url()."/api/v1/package/store",$token,$_POST);    
+    $savePackage = json_decode($savePackage,true);
 }
 
 ?>
@@ -31,7 +35,7 @@ if(isset($_POST['btn-save-package']))
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="page-header-left">
-                                <h3>Paket <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-original-title="test" data-target="#addPackage">Tambah Paket</button>
+                                <h3>Paket <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-original-title="test" data-target="#addPackage">Tambah Paket Baru</button>
                                     <small>Padistik Admin panel</small>
                                 </h3>
                             </div>
@@ -47,13 +51,37 @@ if(isset($_POST['btn-save-package']))
             </div>
             <!-- Container-fluid Ends-->
 
+            <?php if(isset($savePackage['resi'])){ ?>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="badge badge-success">Paket berhasil ditambahkan!</h4><br>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form">
+                                            <div class="form-group mb-0">
+                                                <label for="validationCustom02" class="mb-1">Nomor Resi : </label>
+                                                <input class="form-control" value="<?php echo $savePackage['resi'] ?>" type="text" required readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php }?>
+
             <!-- Container-fluid starts-->
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Daftar Paket</h5>                                
+                                <h5>Daftar paket </h5>                                
                             </div>
                             <div class="card-body">
                                 <div id="basicScenario" class="product-list">
@@ -62,34 +90,36 @@ if(isset($_POST['btn-save-package']))
                                             <thead>
                                                 <tr>
                                                     <th>No Resi</th>
-                                                    <th>Layanan</th>
-                                                    <th>Jenis </th>
-                                                    <th>Asal</th>
-                                                    <th>Tujuan</th>
                                                     <th>Penerima</th>
                                                     <th>Kontak Penerima</th>
+                                                    <th>Asal</th>
+                                                    <th>Alamat </th>
+                                                    <th>Tujuan</th>
+                                                    <th>Layanan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php 
                                                     $data = getData(api_url()."/api/v1/package/all",$token,NULL);
                                                     $data = json_decode($data,true);
-                                                    $data = $data['data'];
-                                                    for($i=0; $i<sizeof($data); $i++)
-                                                    {
+                                                    if(!empty($data['data'])){
+                                                        $data = $data['data'];
+                                                        for($i=0; $i<sizeof($data); $i++)
+                                                        {
                                                 
                                                 ?>
                                             
                                                 <tr>
-                                                    <td><?= $data[$i]['id'] ?></td>
-                                                    <td><?= $data[$i]['service_name'] ?></td>
-                                                    <td><?= $data[$i]['type'] ?></td>
-                                                    <td><?= $data[$i]['origin']; ?></td>
-                                                    <td><?= $data[$i]['receiver_city']; ?></td>
+                                                    <td><?= $data[$i]['no_resi'] ?></td>
                                                     <td><?= $data[$i]['receiver']; ?></td>
                                                     <td><?= $data[$i]['receiver_contact']; ?></td>
+                                                    <td><?= $data[$i]['receiver_city']; ?></td>
+                                                    <td><?= $data[$i]['address'] ?></td>
+                                                    <td><?= $data[$i]['origin']; ?></td>
+                                                    <td><?= $data[$i]['service_name'] ?></td>
+                                                    
                                                 </tr>
-                                                <?php } ?>
+                                                <?php }} ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -119,7 +149,7 @@ if(isset($_POST['btn-save-package']))
                     <div class="form">
                         <div class="form-group">
                             <label for="validationCustom01" class="mb-1">Layanan</label>
-                            <select name="service_id" class="form-control" required>
+                            <select name="service_id" id="service_price" class="form-control" required>
                                 <option disabled selected>-- Silahkan pilih layanan --</option>
                             <?php 
                             $data = getData(api_url()."/api/v1/service/all",$token,NULL);
@@ -129,13 +159,18 @@ if(isset($_POST['btn-save-package']))
                             for($i=0; $i<sizeof($data); $i++)
                             {
                             ?>
-                                <option value='<?= $data[$i]['id'];?>'><?= $data[$i]['name'].' ['.$data[$i]['detail'].']'?></option>
+                                <option value='<?= $data[$i]['id'];?>' data-price='<?= $data[$i]['price'];?>'><?= $data[$i]['name'].' ['.$data[$i]['detail'].']'?></option>
                             <?php } ?>
                             </select>
                         </div>
                         <div class="form-group mb-0">
                             <label for="validationCustom02" class="mb-1">Jenis Paket</label>
-                            <input class="form-control" name="type" type="text" required>
+                            <select class="form-control" name="type" required>
+                                <option selected disabled>-- Silahkan Pilih Jenis Paket --</option>
+                                <option value="Makanan">Makanan</option>
+                                <option value="Elektronik">Elektronik</option>
+                                <option value="Pakaian">Pakaian</option>
+                            </select>
                         </div>
                         <div class="form-group mb-0">
                             <label for="validationCustom02" class="mb-1">Pengirim</label>
@@ -175,11 +210,21 @@ if(isset($_POST['btn-save-package']))
                         </div>
                         <div class="form-group mb-0">
                             <label for="validationCustom02" class="mb-1">Berat Paket</label>
-                            <input class="form-control" name="weight" type="text" required>
+                            <div class="input-group">
+                                <input class="form-control numberFormat" value="0" id="weight" name="weight" type="text" required>
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Kg </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group mb-0">
                             <label for="validationCustom02" class="mb-1">Ongkos Kirim</label>
-                            <input class="form-control" name="price" type="text" required>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Rp </div>
+                                </div>
+                                <input class="form-control numberFormat" value="0" id="price" name="price" type="text" required readonly>
+                            </div>
                         </div>
 
                     </div>
@@ -187,7 +232,7 @@ if(isset($_POST['btn-save-package']))
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" name="btn-save-package" id="btn-save-package">Simpan</button>
-                <button class="btn btn-danger" type="button" data-dismiss="modal">Tutup</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Tutup</button>
             </div>
             </form>
         </div>
@@ -195,6 +240,23 @@ if(isset($_POST['btn-save-package']))
 </div>
 
 <?php include('../template/script.php') ?>
+<script>
+    $('#service_price').on('change',function(){
+        var price = $('option:selected',this).attr('data-price');
+        var weight = parseInt($('#weight').val().replace(/\D/g,''),10); 
+        var total = price*weight;
+        if(isNaN(total)) total = 0;
+        $('#price').val(total.toLocaleString());
+    })
 
+    $('#weight').on('keyup',function(){
+        var price = $('#service_price option:selected').attr('data-price');
+        var weight = parseInt($('#weight').val().replace(/\D/g,''),10); 
+        var total = price*weight;
+
+        if(isNaN(total)) total = 0;
+        $('#price').val(total.toLocaleString());
+    })
+</script>
 </body>
 </html>

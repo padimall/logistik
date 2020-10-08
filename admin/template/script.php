@@ -51,6 +51,11 @@
         $('#example').DataTable( {
             responsive: true,
         } );
+    });
 
+    $('.numberFormat').on('keyup',function(){
+        var n = parseInt($(this).val().replace(/\D/g,''),10);
+        if(isNaN(n)) n =0;
+        $(this).val(n.toLocaleString());
     });
 </script>

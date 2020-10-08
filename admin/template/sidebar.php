@@ -5,11 +5,11 @@
                     <div><img class="img-60 rounded-circle lazyloaded blur-up" src="<?= base_url()?>/assets/images/dashboard/man.png" alt="#">
                     </div>
                     <?php 
-                        $data = getData(api_url()."/api/v1/user",$token,NULL);
-                        $data = json_decode($data,true);
+                        $user_data = getData(api_url()."/api/v1/user",$token,NULL);
+                        $user_data = json_decode($user_data,true);
                     ?>
-                    <h6 class="mt-3 f-14"><?= $data['name']?></h6>
-                    <p><?= $data['type']?></p>
+                    <h6 class="mt-3 f-14"><?= $user_data['name']?></h6>
+                    <p><?= $user_data['type']?></p>
                 </div>
                 <ul class="sidebar-menu">
                     <li><a class="sidebar-header" href="<?= base_url().'/admin/dashboard'?>"><i data-feather="home"></i><span>Dashboard</span></a></li>

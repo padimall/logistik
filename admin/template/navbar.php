@@ -1,7 +1,7 @@
 <!-- Page Header Start-->
 <div class="page-main-header">
         <div class="main-header-left">
-            <div class="logo-wrapper"><a href="index.html"><img class="blur-up lazyloaded" src="<?= base_url()?>/assets/images/layout-2/logo/logo.png" alt=""></a></div>
+            <div class="logo-wrapper"><a href="<?php base_url()?>"><img class="blur-up lazyloaded" src="<?= base_url()?>/assets/images/layout-2/logo/logo.png" alt=""></a></div>
         </div>
         <div class="main-header-right row">
             <div class="mobile-sidebar">

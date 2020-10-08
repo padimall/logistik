@@ -7,6 +7,7 @@ $token = $_SESSION['access_token'];
 
 if(isset($_POST['btn-save-service']))
 {
+    $_POST['price'] = preg_replace('/\./','',$_POST['price']);
     $data = getData(api_url()."/api/v1/service/store",$token,$_POST);    
 }
 
@@ -64,6 +65,7 @@ if(isset($_POST['btn-save-service']))
                                                     <th>Nama Layanan</th>
                                                     <th>Detail </th>
                                                     <th>Harga</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -79,7 +81,8 @@ if(isset($_POST['btn-save-service']))
                                                 <tr>
                                                     <td><?= $data[$i]['name'] ?></td>
                                                     <td><?= $data[$i]['detail'] ?></td>
-                                                    <td><?= $data[$i]['price']; ?></td>
+                                                    <td><?= rupiah($data[$i]['price']); ?></td>
+                                                    <td></td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>
@@ -119,7 +122,12 @@ if(isset($_POST['btn-save-service']))
                         </div>
                         <div class="form-group mb-0">
                             <label for="validationCustom02" class="mb-1">Harga</label>
-                            <input class="form-control" name="price" type="text" required>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Rp </div>
+                                </div>
+                                <input class="form-control numberFormat" value="0" name="price" type="text" required>
+                            </div>
                         </div>
                     </div>
                 

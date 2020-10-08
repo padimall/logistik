@@ -8,9 +8,10 @@ $token = $_SESSION['access_token'];
 if(isset($_POST['btn-kirim']))
 {
     $packageSend = getData(api_url()."/api/v1/tracking/send",$token,$_POST);
+    $packageSend = json_decode($packageSend,true);
 
     $send = array(
-        'target_id' => $_POST['package_id']
+        'target_id' => $_POST['target_id']
     );
 
     $tracking = getData(api_url()."/api/v1/tracking/package",$token,$send);
@@ -66,13 +67,20 @@ if(isset($_POST['btn-kirim']))
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" name="package_id" placeholder="Nomor Resi">
+                                                    <input type="text" class="form-control" name="target_id" placeholder="Nomor Resi">
                                                     <?php 
-                                                        if(empty($tracking['data']) && isset($_POST['btn-kirim'])){
-                                                            echo '<p style="color: red;">Nomor resi tidak ditemukan!</p>';
-                                                        }
-                                                        else if(isset($_POST['btn-kirim']) && !empty($tracking['data'])){
-                                                            echo '<p style="color: red;">Berhasil ditambahkan!</p>';
+                                                        if(isset($_POST['btn-kirim'])){
+                                                            if(isset($packageSend['status'])){
+                                                                if($packageSend['status']==0){
+                                                                    echo '<p class="badge badge-warning">Paket tidak disini!</p>';
+                                                                }
+                                                                else if($packageSend['status']==1){
+                                                                    echo '<p class="badge badge-success">Paket berhasil dikirim!</p>';
+                                                                }
+                                                            }
+                                                            else {
+                                                                echo '<p class="badge badge-danger">Nomor resi tidak ditemukan!</p>';
+                                                            }
                                                         }
                                                     ?>
                                                 </div>
@@ -109,7 +117,7 @@ if(isset($_POST['btn-kirim']))
                                                     <tr>
                                                         <td><?= $tracking[$i]['location'] ?></td>
                                                         <td><?= $tracking[$i]['detail'] ?></td>
-                                                        <td><?= $tracking[$i]['created_at'] ?></td>
+                                                        <td><?= dateIndo($tracking[$i]['created_at']) ?></td>
                                                     </tr>
                                                     <?php } ?>
                                                 </tbody>

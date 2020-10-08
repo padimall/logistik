@@ -3,7 +3,7 @@ include('function.php');
 include('curl.php');
 on_login();
 $message = '';
-$color = '#00baf2';
+$color = 'primary';
 if(isset($_POST['btn-login']))
 {
     $send = array(
@@ -29,8 +29,8 @@ if(isset($_POST['btn-register']))
         'name' => $_POST['register-name'],
         'email' => $_POST['register-email'],
         'phone' => $_POST['register-phone'],
-        'origin' => $_POST['register-origin'],
-        'destination' => $_POST['register-destination'],
+        'origin' => strtoupper($_POST['register-origin']),
+        'destination' => strtoupper($_POST['register-destination']),
         'type' => $_POST['register-type'],
         'password' => $_POST['register-password'],
         'password_confirmation' => $_POST['register-re-password'],
@@ -42,20 +42,22 @@ if(isset($_POST['btn-register']))
     if(empty($register['status']))
     {
         if(isset($register['errors']['email'])){
-            $message = 'Email telah diambil.<br>';
+            $message = '<h3 class="badge badge-danger">Email telah diambil</h3><br>';
         }
         if(isset($register['errors']['phone'])){
-            $message .= 'No Telp/Hp telah diambil.<br>';
+            $message .= '<h3 class="badge badge-danger">No Telp/Hp telah diambil</h3><br>';
         }
         if(isset($register['errors']['password'])){
-            $message .= 'Minimal password adalah 8 karakter atau kata sandi ulang tidak sama.';
+            $message .= '<h3 class="badge badge-danger">Minimal kata sandi adalah 8 karakter</h3>';
+            $message .= '<h3 class="badge badge-danger">Ulang kata sandi harus sama</h3>';
         }
-        $color = 'red';
+
+        $color = 'danger';
 
     }
     else {
         unset($_POST);
-        $message = 'Registrasi berhasil!';
+        $message = '<h3 class="badge badge-primary">Registrasi berhasil!</h3><br>';
     }
 }
 
@@ -232,16 +234,21 @@ if(isset($_POST['btn-register']))
                                         </div>
                                         <div class="form-terms">
                                             <div class="custom-control custom-checkbox mr-sm-2">
-                                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                                                <label class="custom-control-label" for="customControlAutosizing">Remember me</label>
-                                                <a href="#" class="btn btn-default forgot-pass">lost your password</a>
+                                                <!-- <input type="checkbox" class="custom-control-input" id="customControlAutosizing"> -->
+                                                <!-- <label class="custom-control-label" for="customControlAutosizing">Remember me</label> -->
+                                                <!-- <a href="#" class="btn btn-default forgot-pass">lost your password</a> -->
                                             </div>
                                         </div>
                                         <div class="form-button">
                                             <button class="btn btn-primary" type="submit" name="btn-login">Login</button>
-                                            <p style="color : <?= $color?>"><?= $message?></p>
+                                            
                                         </div>
                                         <div class="form-footer">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <?= $message?>
+                                            </div>
+                                        </div>
                                             
                                         </div>
                                     </form>
@@ -258,7 +265,10 @@ if(isset($_POST['btn-register']))
                                             <input required="" name="register-origin" value="<?= !empty($_POST['register-origin']) ? htmlentities($_POST['register-origin']) : '' ?>" type="text" class="form-control" placeholder="Lokasi">
                                         </div>
                                         <div class="form-group">
-                                            <input required="" name="register-type" value="<?= !empty($_POST['register-type']) ? htmlentities($_POST['register-type']) : '' ?>" type="text" class="form-control" placeholder="Jenis">
+                                            <select name="register-type" class="form-control"required>
+                                                <option selected disabled>-- Silahkan pilih jenis akun --</option>
+                                                <option value="WAREHOUSE">WAREHOUSE</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <input required="" name="register-destination" value="<?= !empty($_POST['register-destination']) ? htmlentities($_POST['register-destination']) : '' ?>" type="text" class="form-control" placeholder="Tujuan">
