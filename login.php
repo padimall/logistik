@@ -13,7 +13,7 @@ if(isset($_POST['btn-login']))
     $login = getData(api_url()."/api/v1/login",$send);
     $login = json_decode($login,true);
     if(empty($login['access_token'])){
-        $message = 'Email atau password salah!';
+        $message .= '<h3 class="badge badge-danger">Email atau password salah!</h3>';
     }
     else {
         
