@@ -90,7 +90,8 @@ if(isset($_POST['btn-terima']))
                                             </div>
                                         </div>                                
                                     </div>
-                                </form>             
+                                </form>     
+                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-original-title="test" data-target="#scanPackage">Scan Paket</button>        
                             </div>
                             <div class="card-body">
                                 <div id="basicScenario" class="product-list">
@@ -134,12 +135,63 @@ if(isset($_POST['btn-terima']))
         </div>
         
 
+        <div class="modal fade" id="scanPackage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title f-w-600" id="exampleModalLabel">Scan Paket</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form">
+                    <div style="width: 100%" id="reader"></div>
+                    <p class="badge badge-secondary form-control" id="message"></p>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
         <?php include('../template/footer.php');?>
     </div>
 
 </div>
 
 <?php include('../template/script.php') ?>
+<script src="qr.js"></script>
+<script>
+function onScanSuccess(qrCodeMessage) {
+	// handle on success condition with the decoded message
+    $.ajax({
+        'url' : 'action-terima.php',
+        'method' : 'POST',
+        'dataType' : 'json',
+        'data' : {
+            'target_id' : qrCodeMessage
+        },
+        success : function(data){
+            if(typeof data.status !== 'undefined'){
+                if(data.status == 1){
+                    $('#message').html('Paket berhasil diterima!');
+                }
+                else if(data.status == 0)
+                {
+                    $('#message').html('Paket telah di sini!');
+                }   
+            }
+            else {
+                $('#message').html('Nomor resi tidak terdaftar!');
+            }
+        }
+    });
+}
 
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+	"reader", { fps: 10, qrbox: 250 });
+    html5QrcodeScanner.render(onScanSuccess);
+</script>
 </body>
 </html>

@@ -12,6 +12,7 @@ if(isset($_POST['btn-save-package']))
 
     $savePackage = getData(api_url()."/api/v1/package/store",$token,$_POST);    
     $savePackage = json_decode($savePackage,true);
+    
 }
 
 ?>
@@ -51,7 +52,8 @@ if(isset($_POST['btn-save-package']))
             </div>
             <!-- Container-fluid Ends-->
 
-            <?php if(isset($savePackage['resi'])){ ?>
+            <?php if(isset($savePackage['resi'])){ 
+                ?>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
@@ -64,6 +66,7 @@ if(isset($_POST['btn-save-package']))
                                             <div class="form-group mb-0">
                                                 <label for="validationCustom02" class="mb-1">Nomor Resi : </label>
                                                 <input class="form-control" value="<?php echo $savePackage['resi'] ?>" type="text" required readonly>
+                                                <img src="<?php echo 'generate.php?id='.$savePackage['resi']; ?>">   
                                             </div>
                                         </div>
                                     </div>
@@ -81,7 +84,7 @@ if(isset($_POST['btn-save-package']))
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Daftar paket </h5>                                
+                                <h5>Daftar paket </h5>                          
                             </div>
                             <div class="card-body">
                                 <div id="basicScenario" class="product-list">
