@@ -42,14 +42,14 @@ if(isset($_POST['btn-register']))
     if(empty($register['status']))
     {
         if(isset($register['errors']['email'])){
-            $message = '<h3 class="badge badge-danger">Email telah diambil</h3><br>';
+            $message = '<h3 class="badge badge-danger">Email telah digunakan</h3><br>';
         }
         if(isset($register['errors']['phone'])){
-            $message .= '<h3 class="badge badge-danger">No Telp/Hp telah diambil</h3><br>';
+            $message .= '<h3 class="badge badge-danger">No Telp/Hp telah digunakan</h3><br>';
         }
         if(isset($register['errors']['password'])){
-            $message .= '<h3 class="badge badge-danger">Minimal kata sandi adalah 8 karakter</h3>';
-            $message .= '<h3 class="badge badge-danger">Ulang kata sandi harus sama</h3>';
+            $message .= '<h3 class="badge badge-danger">Minimal kata sandi adalah 8 karakter</h3><br>';
+            $message .= '<h3 class="badge badge-danger">Ulang kata sandi harus sama</h3><br>';
         }
 
         $color = 'danger';
@@ -225,6 +225,11 @@ if(isset($_POST['btn-register']))
                             </ul>
                             <div class="tab-content" id="top-tabContent">
                                 <div class="tab-pane fade show active" id="top-profile" role="tabpanel" aria-labelledby="top-profile-tab">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <?= $message?>
+                                        </div>
+                                    </div>
                                     <form class="form-horizontal auth-form" method="post" >
                                         <div class="form-group">
                                             <input required="" name="login-email" type="email" class="form-control" placeholder="Email" id="exampleInputEmail1">
@@ -244,22 +249,17 @@ if(isset($_POST['btn-register']))
                                             
                                         </div>
                                         <div class="form-footer">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <?= $message?>
-                                            </div>
-                                        </div>
                                             
                                         </div>
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
-                                    <form class="form-horizontal auth-form" method="POST">
+                                    <form class="form-horizontal auth-form" method="POST" id="form-register">
                                         <div class="form-group">
                                             <input required="" name="register-name" value="<?= !empty($_POST['register-name']) ? htmlentities($_POST['register-name']) : '' ?>" type="text" class="form-control" placeholder="Nama" id="exampleInputEmail12">
                                         </div>
                                         <div class="form-group">
-                                            <input required="" name="register-phone" value="<?= !empty($_POST['register-phone']) ? htmlentities($_POST['register-phone']) : '' ?>" type="text" class="form-control" placeholder="No Telp/Hp">
+                                            <input required="" name="register-phone" value="<?= !empty($_POST['register-phone']) ? htmlentities($_POST['register-phone']) : '' ?>" type="text" class="form-control phoneNumber" placeholder="No Telp/Hp">
                                         </div>
                                         <div class="form-group">
                                             <input required="" name="register-origin" value="<?= !empty($_POST['register-origin']) ? htmlentities($_POST['register-origin']) : '' ?>" type="text" class="form-control" placeholder="Lokasi">
@@ -277,10 +277,12 @@ if(isset($_POST['btn-register']))
                                             <input required="" name="register-email" value="<?= !empty($_POST['register-email']) ? htmlentities($_POST['register-email']) : '' ?>" type="email" class="form-control" placeholder="Email">
                                         </div>
                                         <div class="form-group">
-                                            <input required="" name="register-password" type="password" class="form-control" placeholder="Kata sandi">
+                                            <input required="" name="register-password" id="pw1" type="password" class="form-control" placeholder="Kata sandi">
+                                            <h3 class="badge badge-danger" id="info1"></h3>
                                         </div>
                                         <div class="form-group">
-                                            <input required="" name="register-re-password" type="password" class="form-control" placeholder="Ulang kata sandi">
+                                            <input required="" name="register-re-password" id="pw2" type="password" class="form-control" placeholder="Ulang kata sandi">
+                                            <h3 class="badge badge-danger" id="info2"></h3>
                                         </div>
                                         <div class="form-button">
                                             <button class="btn btn-primary" type="submit" name="btn-register">Register</button>
@@ -334,6 +336,26 @@ if(isset($_POST['btn-register']))
             dots: true
         }
     );
+    $('.phoneNumber').on('keyup',function(){
+        var n = $(this).val().replace(/\D/g,'');
+        $(this).val(n);
+    });
+
+    $('#form-register').on('submit',function(){
+        $('#info1').html('');
+        $('#info2').html('');
+        var pw1 = $('#pw1').val();
+        var pw2 = $('#pw2').val();
+
+        if(pw1.length<8){
+            $('#info1').html('Minimal kata sandi adalah 8 karakter');
+            return false;
+        }
+        if(pw1!=pw2){
+            $('#info2').html('Ulang kata sandi harus sama');
+            return false;
+        }
+    })
 </script>
 </body>
 </html>

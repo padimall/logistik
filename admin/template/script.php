@@ -58,4 +58,9 @@
         if(isNaN(n)) n =0;
         $(this).val(n.toLocaleString());
     });
+
+    $('.phoneNumber').on('keyup',function(){
+        var n = $(this).val().replace(/\D/g,'');
+        $(this).val(n);
+    });
 </script>

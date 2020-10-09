@@ -135,7 +135,7 @@ if(isset($_POST['btn-terima']))
         </div>
         
 
-        <div class="modal fade" id="scanPackage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="scanPackage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -147,7 +147,6 @@ if(isset($_POST['btn-terima']))
                     <div style="width: 100%" id="reader"></div>
                     <p class="badge badge-secondary form-control" id="message"></p>
                 </div>
-                
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger" type="button" data-dismiss="modal">Tutup</button>

@@ -181,7 +181,7 @@ if(isset($_POST['btn-save-package']))
                         </div>
                         <div class="form-group mb-0">
                             <label for="validationCustom02" class="mb-1">Kontak Pengirim</label>
-                            <input class="form-control" name="sender_contact" type="text" required>
+                            <input class="form-control phoneNumber" name="sender_contact" type="text" required>
                         </div>
                         <div class="form-group mb-0">
                             <label for="validationCustom02" class="mb-1">Penerima</label>
@@ -189,7 +189,7 @@ if(isset($_POST['btn-save-package']))
                         </div>
                         <div class="form-group mb-0">
                             <label for="validationCustom02" class="mb-1">Kontak Penerima</label>
-                            <input class="form-control" name="receiver_contact" type="text" required>
+                            <input class="form-control phoneNumber" name="receiver_contact" type="text" required>
                         </div>
                         <div class="form-group mb-0">
                             <label for="validationCustom02" class="mb-1">Provinsi Penerima</label>
@@ -205,7 +205,7 @@ if(isset($_POST['btn-save-package']))
                         </div>
                         <div class="form-group mb-0">
                             <label for="validationCustom02" class="mb-1">Kode Pos Penerima</label>
-                            <input class="form-control" name="receiver_post_code" type="text" required>
+                            <input class="form-control phoneNumber" name="receiver_post_code" type="text" required>
                         </div>
                         <div class="form-group mb-0">
                             <label for="validationCustom02" class="mb-1">Alamat Penerima</label>
