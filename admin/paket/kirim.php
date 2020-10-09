@@ -83,7 +83,7 @@ $package = json_decode($package,true);
                                                             if(isset($multiple['status']))
                                                             {
                                                                 if($multiple['status']==1){
-                                                                    echo '<p class="badge badge-success">Paket berhasil dikirim!</p>';
+                                                                    echo '<p class="badge badge-success">Sukses!</p>';
                                                                 }
                                                             }
                                                         }
@@ -125,7 +125,8 @@ $package = json_decode($package,true);
                                                     <tr>
                                                         <th><button class="btn btn-primary btn-sm" name="btn-mass-kirim">Kirim Paket</button></th>
                                                         <th>No Resi</th>
-                                                        <th>Detail</th>
+                                                        <th>Asal</th>
+                                                        <th>Tujuan</th>
                                                         <th>Waktu</th>
                                                     </tr>
                                                 </thead>
@@ -138,7 +139,8 @@ $package = json_decode($package,true);
                                                     <tr>
                                                         <td><input type="checkbox" value="<?= $package[$i]['no_resi'] ?>" name="checkPackage[]"></td>
                                                         <td><?= $package[$i]['no_resi'] ?></td>
-                                                        <td><?= $package[$i]['id'] ?></td>
+                                                        <td><?= $package[$i]['origin'] ?></td>
+                                                        <td><?= $package[$i]['receiver_city'] ?></td>
                                                         <td><?= dateIndo($package[$i]['created_at']) ?></td>
                                                     </tr>
                                                     <?php } ?>
@@ -209,12 +211,13 @@ $package = json_decode($package,true);
             else {
                 $('#message').html('Nomor resi tidak terdaftar!');
             }
+            setTimeout(function(){ $('#message').html(''); }, 2000);
         }
     });
 }
 
     var html5QrcodeScanner = new Html5QrcodeScanner(
-	"reader", { fps: 10, qrbox: 250 });
+	"reader", { fps: 7, qrbox: 250 });
     html5QrcodeScanner.render(onScanSuccess);
 </script>
 </body>

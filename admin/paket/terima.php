@@ -184,12 +184,13 @@ function onScanSuccess(qrCodeMessage) {
             else {
                 $('#message').html('Nomor resi tidak terdaftar!');
             }
+            setTimeout(function(){ $('#message').html(''); }, 2000);
         }
     });
 }
 
     var html5QrcodeScanner = new Html5QrcodeScanner(
-	"reader", { fps: 10, qrbox: 250 });
+	"reader", { fps: 7, qrbox: 250 });
     html5QrcodeScanner.render(onScanSuccess);
 </script>
 </body>

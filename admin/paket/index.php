@@ -99,6 +99,7 @@ if(isset($_POST['btn-save-package']))
                                                     <th>Alamat </th>
                                                     <th>Tujuan</th>
                                                     <th>Layanan</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -120,6 +121,7 @@ if(isset($_POST['btn-save-package']))
                                                     <td><?= $data[$i]['address'] ?></td>
                                                     <td><?= $data[$i]['origin']; ?></td>
                                                     <td><?= $data[$i]['service_name'] ?></td>
+                                                    <td><button type="button" class="btn btn-sm btn-secondary qrbutton" data-toggle="modal" data-original-title="test" data-resi="<?php echo $data[$i]['no_resi']?>" data-target="#showQr">QR</button></td>
                                                     
                                                 </tr>
                                                 <?php }} ?>
@@ -242,6 +244,29 @@ if(isset($_POST['btn-save-package']))
     </div>
 </div>
 
+<div class="modal fade" id="showQr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title f-w-600" id="exampleModalLabel">QR Code</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form">
+                    <div class="form-group mb-0">
+                        <p id="lblqr"></p>
+                        <img src="" id="qrcode" class="form-group" >
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php include('../template/script.php') ?>
 <script>
     $('#service_price').on('change',function(){
@@ -259,6 +284,12 @@ if(isset($_POST['btn-save-package']))
 
         if(isNaN(total)) total = 0;
         $('#price').val(total.toLocaleString());
+    })
+
+    $('.qrbutton').on('click',function(){
+        var resi = $(this).data('resi');
+        $('#qrcode').attr('src','generate?id='+resi);
+        $('#lblqr').html('Nomor Resi : '+resi);
     })
 </script>
 </body>
