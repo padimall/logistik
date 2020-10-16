@@ -4,7 +4,7 @@
     $url = api_url()."/api/v1/tracking/send";
     $ch = curl_init();
     $header = array();
-    $postData = array('target_id'=>$_POST['target_id']);
+    $postData = array('target_id'=>$_POST['target_id'],'destination'=>$_POST['destination']);
     // $header[] = 'Content-Type: application/json';
     $header[] = 'Content-Type: application/x-www-form-urlencoded';
     $header[] = 'X-Requested-With: XMLHttpRequest';

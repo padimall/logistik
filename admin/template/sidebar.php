@@ -22,6 +22,7 @@
                     </li>
                     <li><a class="sidebar-header" href="<?= base_url().'/admin/lacak'?>"><i data-feather="search"></i><span>Lacak</span></a></li>
                     <li><a class="sidebar-header" href="<?= base_url().'/admin/layanan'?>"><i data-feather="clipboard"></i><span>Layanan</span></a></li>
+                    <li><a class="sidebar-header" href="<?= base_url().'/admin/destinasi'?>"><i data-feather="map"></i><span>Destinasi</span></a></li>
                     <li><a class="sidebar-header" href="<?= base_url().'/admin/profil'?>"><i data-feather="user"></i><span>Profil</span></a></li>
                 </ul>
             </div>

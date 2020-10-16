@@ -64,10 +64,11 @@ if(isset($_POST['btn-terima']))
                                 <h5>Terima Paket</h5><br>                   
                                 <form method="POST">
                                     <div class="form">
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <input type="text" class="form-control" name="target_id" placeholder="Nomor Resi">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Nomor Resi</label>
+                                                    <input type="text" class="form-control" name="target_id" placeholder="Masukkan nomor resi" required>
                                                     <?php 
                                                         if(isset($_POST['btn-terima'])){
                                                             if(isset($packageReceive['status'])){
@@ -84,14 +85,14 @@ if(isset($_POST['btn-terima']))
                                                         }
                                                     ?>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="form-group">
                                                     <button class="btn btn-primary btn-sm" name="btn-terima">Terima</button>
+                                                    <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-original-title="test" data-target="#scanPackage">Scan Paket</button>
                                                 </div>
                                             </div>
-                                        </div>                                
+                                        </div>                           
                                     </div>
-                                </form>     
-                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-original-title="test" data-target="#scanPackage">Scan Paket</button>        
+                                </form>             
                             </div>
                             <div class="card-body">
                                 <div id="basicScenario" class="product-list">
@@ -145,7 +146,7 @@ if(isset($_POST['btn-terima']))
             <div class="modal-body">
                 <div class="form">
                     <div style="width: 100%" id="reader"></div>
-                    <p class="badge badge-secondary form-control" id="message"></p>
+                    <p style="font-size : 20px" class="badge badge-secondary form-control" id="message"></p>
                 </div>
             </div>
             <div class="modal-footer">

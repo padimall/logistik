@@ -30,7 +30,6 @@ if(isset($_POST['btn-register']))
         'email' => $_POST['register-email'],
         'phone' => $_POST['register-phone'],
         'origin' => strtoupper($_POST['register-origin']),
-        'destination' => strtoupper($_POST['register-destination']),
         'type' => $_POST['register-type'],
         'password' => $_POST['register-password'],
         'password_confirmation' => $_POST['register-re-password'],
@@ -270,9 +269,9 @@ if(isset($_POST['btn-register']))
                                                 <option value="WAREHOUSE">WAREHOUSE</option>
                                             </select>
                                         </div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <input required="" name="register-destination" value="<?= !empty($_POST['register-destination']) ? htmlentities($_POST['register-destination']) : '' ?>" type="text" class="form-control" placeholder="Tujuan">
-                                        </div>
+                                        </div> -->
                                         <div class="form-group">
                                             <input required="" name="register-email" value="<?= !empty($_POST['register-email']) ? htmlentities($_POST['register-email']) : '' ?>" type="email" class="form-control" placeholder="Email">
                                         </div>
