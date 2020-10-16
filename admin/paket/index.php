@@ -8,7 +8,9 @@ $token = $_SESSION['access_token'];
 if(isset($_POST['btn-save-package']))
 {
     $_POST['weight'] = preg_replace('/\./','',$_POST['weight']);
+    $_POST['weight'] = preg_replace('/\,/','',$_POST['weight']);
     $_POST['price'] = preg_replace('/\./','',$_POST['price']);
+    $_POST['price'] = preg_replace('/\,/','',$_POST['price']);
 
     $savePackage = getData(api_url()."/api/v1/package/store",$token,$_POST);    
     $savePackage = json_decode($savePackage,true);
@@ -84,7 +86,7 @@ if(isset($_POST['btn-save-package']))
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Daftar paket <?php var_dump($savePackage)?></h5>                          
+                                <h5>Daftar paket </h5>                          
                             </div>
                             <div class="card-body">
                                 <div id="basicScenario" class="product-list">
