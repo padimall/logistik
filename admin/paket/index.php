@@ -84,7 +84,7 @@ if(isset($_POST['btn-save-package']))
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Daftar paket </h5>                          
+                                <h5>Daftar paket <?php var_dump($savePackage)?></h5>                          
                             </div>
                             <div class="card-body">
                                 <div id="basicScenario" class="product-list">
