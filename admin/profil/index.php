@@ -137,7 +137,7 @@ if(isset($_POST['btn-update-password']))
                                     <span><?= $user_data['email']?></span>
                                 </div>
                                 <hr>
-                                <div class="project-status">
+                                <!-- <div class="project-status">
                                     <h5 class="f-w-600">Employee Status</h5>
                                     <div class="media">
                                         <div class="media-body">
@@ -163,7 +163,7 @@ if(isset($_POST['btn-update-password']))
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
